@@ -1,0 +1,65 @@
+Bootstrap: docker
+From: centos:centos7
+
+%labels
+    AUTHOR jonathan.j.ellis@gmail.com
+    VERSION 1.0
+
+%post
+
+yum install -y epel-release
+# This is v3.4.4 we have only tested on v3.4.1
+yum install -y \
+  ed \
+  R \
+  openssl-devel \
+  bzip2-devel \
+  cairo-devel \
+  xz-devel \
+  libcurl-devel \
+  libxml2-devel \
+  libssh2-devel \
+  mariadb-devel
+
+R --slave -e "repos <- getOption('repos'); repos['CRAN'] <- 'https://cloud.r-project.org'; options(repos = repos); install.packages(c( \
+  'foreach',  \
+  'argparse',  \
+  'doMC',  \
+  'R.utils',  \
+  'readr',  \
+  'futile.logger',  \
+  'futile.options', \
+  'devtools',  \
+  'roxygen2',  \
+  'lazyeval',  \
+  'magrittr',  \
+  'plyr',  \
+  'dplyr', \
+  'httr', \
+  'git2r', \
+  'proto', \
+  'lambda.r', \
+  'ggplot2', \
+  'tidyr', \
+  'RColorBrewer', \
+  'jsonlite', \
+  'assertthat', \
+  'codetools', \
+  'crayon', \
+  'data.table', \
+  'optparse', \
+  'lubridate', \
+  'Rcpp', \
+  'RcppArmadillo', \
+  'RCurl', \
+  'reshape2', \
+  'readxl', \
+  'R.utils', \
+  'stringi', \
+  'stringr', \
+  'testthat', \
+  'assertthat', \
+  'withr', \
+  'packrat', \
+  'RMySQL', \
+  'rjson'))"
